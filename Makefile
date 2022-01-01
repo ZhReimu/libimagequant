@@ -73,8 +73,8 @@ $(JNIDLL) $(JNIDLLIMP): $(JAVAHEADERS) $(OBJS) org/pngquant/PngQuant.c
 $(JAVACLASSES): %.class: %.java
 	javac $<
 
-$(JAVAHEADERS): %.h: %.class
-	javah -o $@ $(subst /,., $(patsubst %.class,%,$<)) && touch $@
+$(JAVAHEADERS): %.h: %.java
+	javac -h $(subst $(notdir $@), , $@) $<
 
 dist: $(TARFILE) cargo
 
